@@ -1,11 +1,8 @@
 FROM  r.j3ss.co/img as img
 
-FROM debian:jessie as base
+FROM alpine:3.8 AS base
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends git bash \
-    && apt-get -y clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apk add --no-cache git bash
 
 COPY --from=img /usr/bin/img /usr/bin/img
 COPY --from=img /usr/bin/runc /usr/bin/runc
